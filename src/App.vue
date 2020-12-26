@@ -21,7 +21,7 @@ export default {
   box-sizing: border-box;
 }
 body{
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Abel", sans-serif;
   background: rgb(241, 241, 241);
   color: black;
   min-height: 100vh;

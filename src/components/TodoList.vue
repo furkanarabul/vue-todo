@@ -1,16 +1,24 @@
 <template>
-<form>
-<div class="header-input">
-    <input type="text" class="todo-input" placeholder="Write a new task"  v-model="newTodo" @keyup.enter="addTodo">
-    <button class="todo-button" type="submit">
-        <i class="fas fa-plus-square"></i>
-    </button>   
-    
+<div>
+    <div class="header-input">
+        <input type="text" class="todo-input" placeholder="Write a new task"  v-model="newTodo" @keyup.enter="addTodo">
+        <button @click="addTodo" class="todo-button">
+            <i class="fas fa-plus-square"></i>
+        </button>
+    </div>
+    <div class="todo-list">
+        <ul>
+            <li v-for="todo in todos" :key="todo.id" class="todo-item">
+                {{todo.title}}
+            </li>
+        </ul>
+    </div>
+    <div >
+    </div>   
 </div>
-<div v-for="todo in todos" :key="todo.id" class="todo-item">
-    {{todo.title}}
-</div>
-</form>
+
+
+
 
 </template>
 
