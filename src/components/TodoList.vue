@@ -8,9 +8,9 @@
     </div>
     <div class="todo-list">
         <ul>
-            <li v-for="todo in todos" :key="todo.title" class="todo-item">
+            <li v-for="(todo, index) in todos" :key="todo.title" class="todo-item" :class="{completed : todo.completed}">
                 {{todo.title}}
-                <button @click="checkTodo" class="complete-btn"><i class="fas fa-check"></i></button>
+                <input type="checkbox" v-model="todo.completed"  class="complete-btn">
                 <button @click="removeTodo" class="trash-btn"><i class="fas fa-trash"></i></button>
             </li>
         </ul>
@@ -30,18 +30,19 @@ export default {
     },
     methods: {
         addTodo(){
+            if(this.newTodo.trim().length == 0){
+                alert('Please type something')
+                return
+            }
             this.todos.push({
                 title: this.newTodo,
                 completed: false,
             })
             this.newTodo = ''
         },
-        removeTodo(){
-            alert('remove')
+        removeTodo(index){
+            this.todos.splice(index, 1)
         },
-        checkTodo(){
-            alert('check')
-        }
     }
 }
 </script>
@@ -102,6 +103,11 @@ button:hover {
 }
 .trash-btn:hover{
     color:rgb(212, 68, 68);
+}
+.completed{
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.5;
 }
 
 </style>
