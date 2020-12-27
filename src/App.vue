@@ -1,51 +1,59 @@
 <template>
   <div id="app" class="container">
-    <img class="logo" src="./assets/logo.png">
+    <h1>Todo-list</h1>
     <todo-list></todo-list>
   </div>
 </template>
 
 <script>
-import TodoList from './components/TodoList.vue'
+import TodoList from "./components/TodoList.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TodoList,
+    TodoList
   }
-}
+};
 </script>
 
 <style>
-*{
+* {
   box-sizing: border-box;
 }
-body{
+body {
   font-family: "Abel", sans-serif;
   background: rgb(241, 241, 241);
   color: black;
-  min-height: 100vh;
+  min-height: 88vh;
   transition: all 0.5s ease;
 }
-input{
+input {
   padding: 1rem;
   font-size: 1.5rem;
   border: none;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
-.container{
+.container {
   max-width: 720px;
   margin: 0 auto;
 }
-.logo{
+.logo {
   display: block;
   margin: 20px auto;
-  height: 75px  ;
+  height: 75px;
 }
 #app {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+h1 {
+  background: linear-gradient(124.11deg, #057c52 3.52%, #00ae72 41.89%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
 }
 </style>
