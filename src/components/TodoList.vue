@@ -8,18 +8,14 @@
     </div>
     <div class="todo-list">
         <ul>
-            <li v-for="todo in todos" :key="todo.id" class="todo-item">
+            <li v-for="todo in todos" :key="todo.title" class="todo-item">
                 {{todo.title}}
+                <button @click="checkTodo" class="complete-btn"><i class="fas fa-check"></i></button>
+                <button @click="removeTodo" class="trash-btn"><i class="fas fa-trash"></i></button>
             </li>
         </ul>
     </div>
-    <div >
-    </div>   
 </div>
-
-
-
-
 </template>
 
 <script>
@@ -29,12 +25,6 @@ export default {
         return {
             newTodo: '',
             todos:[
-                {
-                    'title':'Finish Vue Screencast',
-                },
-                {
-                    'title':'Take over world',
-                },
             ]
         }
     },
@@ -42,8 +32,15 @@ export default {
         addTodo(){
             this.todos.push({
                 title: this.newTodo,
+                completed: false,
             })
             this.newTodo = ''
+        },
+        removeTodo(){
+            alert('remove')
+        },
+        checkTodo(){
+            alert('check')
         }
     }
 }
@@ -58,7 +55,6 @@ export default {
     align-items: center;
 }
 header,
-
 input,
 button {
     padding: 1rem;
@@ -85,5 +81,28 @@ button {
 button:hover {
     color: #2ca54a;
 }
+.todo-item{
+    background: white;
+    padding: 0rem 0.5rem;
+    margin:1rem;
+    height: 60px;
+    color:black;
+    font-size:1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease;
+    border-radius: 8px;
+}
+.complete-btn{
+    margin-left: auto;
+    background: none;
+}
+.trash-btn{
+    background:none;
+}
+.trash-btn:hover{
+    color:rgb(212, 68, 68);
+}
+
 </style>
 
