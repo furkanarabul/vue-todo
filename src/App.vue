@@ -18,7 +18,7 @@
       <ul>
         <li
           v-for="(todo, index) in todos"
-          :key="todo.title"
+          :key="todo.id"
           class="todo-item"
           :class="{ completed: todo.completed }"
         >
@@ -28,7 +28,7 @@
             v-model="todo.completed"
             class="complete-btn"
           />
-          <button @click="removeTodo" class="trash-btn">
+          <button @click="removeTodo(todo)" class="trash-btn">
             <i class="fas fa-trash"></i>
           </button>
         </li>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "todo-list",
   data() {
@@ -59,15 +60,46 @@ export default {
         alert("Please type something");
         return;
       }
-      this.todos.push({
-        title: this.newTodo,
-        completed: false,
-      });
-      this.newTodo = "";
+      axios.post("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",{title: this.newTodo})
+      .then(response =>{
+        this.todos.push({
+          id: response.data.name,
+          title: this.newTodo
+        })
+        this.newTodo = "";
+      })
+      .catch( e=>{
+        console.log(e)
+      })
     },
-    removeTodo(index) {
-      this.todos.splice(index, 1);
+    removeTodo(todo) {
+      axios.delete("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + todo.id + ".json")
+      .then(response =>{
+        console.log(response)
+        let index = this.todos.findIndex(i=>{
+          return i.id == todo.id
+        })
+        this.todos.splice(index,1)
+      })
+      .catch(e=>{
+        console.log(e)
+      })
     },
+  },
+  created(){
+      axios.get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
+      .then(response =>{
+        for(let key in response.data){
+          //console.log(response.data[key].title)
+          //console.log(response.data)
+          let todo = {
+            title : response.data[key].title,
+            id : key
+          }
+          this.todos.push(todo)
+        }
+      })
+      .catch()
   },
 };
 </script>
