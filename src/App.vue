@@ -27,7 +27,7 @@
             type="checkbox"
             v-model="todo.completed"
             class="complete-btn"
-            @click="() => completeTodo(index)"
+            @click="completeTodo(index)"
           />
           <button @click="removeTodo(todo)" class="trash-btn">
             <i class="fas fa-trash"></i>
@@ -66,6 +66,7 @@ export default {
         this.todos.push({
           id: response.data.name,
           title: this.newTodo,
+          completed: false,
         })
         this.newTodo = "";
       })
@@ -87,7 +88,7 @@ export default {
       })
     },
     completeTodo(index){
-      console.log(this.todos[index].completed)
+      axios.patch("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + this.todos[index].id + ".json",{completed: !this.todos[index].completed})
     }
   },
   created(){
@@ -98,6 +99,7 @@ export default {
           //console.log(response.data)
           let todo = {
             title : response.data[key].title,
+            completed : response.data[key].completed,
             id : key
           }
           this.todos.push(todo)
@@ -219,6 +221,7 @@ button:hover {
 }
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
+  zoom: 1.8;
 }
 .empty {
   font-size: 1.5rem;
