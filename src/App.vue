@@ -29,34 +29,39 @@
             class="complete-btn"
             @click="completeTodo(index)"
           />
-          <button @click="removeTodo(todo)" class="trash-btn" >
+          <button @click="removeTodo(todo)" class="trash-btn">
             <i class="fas fa-trash"></i>
           </button>
         </li>
       </ul>
     </div>
     <div class="github">
-      <a href="https://github.com/furkanarabul/vue-todo" target="_blank" title="to-do app"><i class="fab fa-github fa-2x"></i></a>
+      <a
+        href="https://github.com/furkanarabul/vue-todo"
+        target="_blank"
+        title="to-do app"
+        ><i class="fab fa-github fa-2x"></i
+      ></a>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "todo-list",
   data() {
     return {
       newTodo: "",
-      todos: [],
+      todos: []
     };
   },
   computed: {
-    isEmpty: function () {
+    isEmpty: function() {
       if (this.todos.length == 0) {
         return true;
       }
-    },
+    }
   },
   methods: {
     addTodo() {
@@ -64,57 +69,71 @@ export default {
         alert("Please type something");
         return;
       }
-      axios.post("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",{title: this.newTodo,completed:false})
-      .then(response =>{
-        this.todos.push({
-          id: response.data.name,
-          title: this.newTodo,
-          completed: false,
+      axios
+        .post(
+          "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",
+          { title: this.newTodo, completed: false }
+        )
+        .then(response => {
+          this.todos.push({
+            id: response.data.name,
+            title: this.newTodo,
+            completed: false
+          });
+          this.newTodo = "";
         })
-        this.newTodo = "";
-      })
-      .catch( e=>{
-        console.log(e)
-      })
+        .catch(e => {
+          console.log(e);
+        });
     },
     removeTodo(todo) {
-      console.log(event.target)
-      if(event.target.classList.contains('fa-trash')){
-        event.target.parentElement.parentElement.classList.add('fall')
+      console.log(event.target);
+      if (event.target.classList.contains("fa-trash")) {
+        event.target.parentElement.parentElement.classList.add("fall");
       }
-      axios.delete("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + todo.id + ".json")
-      .then(response =>{
-        console.log(response)
-        let index = this.todos.findIndex(i=>{
-          return i.id == todo.id
+      axios
+        .delete(
+          "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" +
+            todo.id +
+            ".json"
+        )
+        .then(response => {
+          console.log(response);
+          let index = this.todos.findIndex(i => {
+            return i.id == todo.id;
+          });
+          this.todos.splice(index, 1);
         })
-        this.todos.splice(index,1)
-      })
-      .catch(e=>{
-        console.log(e)
-      })
+        .catch(e => {
+          console.log(e);
+        });
     },
-    completeTodo(index){
-      
-      axios.patch("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + this.todos[index].id + ".json",{completed: !this.todos[index].completed})
+    completeTodo(index) {
+      axios.patch(
+        "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" +
+          this.todos[index].id +
+          ".json",
+        { completed: !this.todos[index].completed }
+      );
     }
   },
-  created(){
-      axios.get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
-      .then(response =>{
-        for(let key in response.data){
+  created() {
+    axios
+      .get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
+      .then(response => {
+        for (let key in response.data) {
           //console.log(response.data[key].title)
           //console.log(response.data)
           let todo = {
-            title : response.data[key].title,
-            completed : response.data[key].completed,
-            id : key
-          }
-          this.todos.push(todo)
+            title: response.data[key].title,
+            completed: response.data[key].completed,
+            id: key
+          };
+          this.todos.push(todo);
         }
       })
-      .catch()
-  },
+      .catch();
+  }
 };
 </script>
 
@@ -195,15 +214,15 @@ button {
 button:hover {
   color: #2ca54a;
 }
-ul{
-  padding:20px;
+ul {
+  padding: 20px;
 }
-a{
+a {
   text-decoration: none;
-  color: inherit!important;
+  color: inherit !important;
   opacity: 0.2;
 }
-a:hover{
+a:hover {
   opacity: 1;
   transition: all 0.5s ease;
 }
@@ -252,7 +271,7 @@ a:hover{
 .hidden {
   display: none;
 }
-.github{
+.github {
   position: fixed;
   bottom: 15px;
   left: 15px;
