@@ -27,6 +27,7 @@
             type="checkbox"
             v-model="todo.completed"
             class="complete-btn"
+            @click="() => completeTodo(index)"
           />
           <button @click="removeTodo(todo)" class="trash-btn">
             <i class="fas fa-trash"></i>
@@ -60,11 +61,11 @@ export default {
         alert("Please type something");
         return;
       }
-      axios.post("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",{title: this.newTodo})
+      axios.post("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",{title: this.newTodo,completed:false})
       .then(response =>{
         this.todos.push({
           id: response.data.name,
-          title: this.newTodo
+          title: this.newTodo,
         })
         this.newTodo = "";
       })
@@ -85,6 +86,9 @@ export default {
         console.log(e)
       })
     },
+    completeTodo(index){
+      console.log(this.todos[index].completed)
+    }
   },
   created(){
       axios.get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
