@@ -78,7 +78,10 @@ export default {
       })
     },
     removeTodo(todo) {
-      event.target.parentElement.parentElement.classList.add('fall')
+      console.log(event.target)
+      if(event.target.classList.contains('fa-trash')){
+        event.target.parentElement.parentElement.classList.add('fall')
+      }
       axios.delete("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + todo.id + ".json")
       .then(response =>{
         console.log(response)
@@ -92,6 +95,7 @@ export default {
       })
     },
     completeTodo(index){
+      
       axios.patch("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + this.todos[index].id + ".json",{completed: !this.todos[index].completed})
     }
   },
@@ -192,7 +196,7 @@ button:hover {
   color: #2ca54a;
 }
 ul{
-  padding:20px
+  padding:20px;
 }
 a{
   text-decoration: none;
@@ -272,6 +276,7 @@ a:hover{
   .fa-trash {
     color: white !important;
     opacity: 0.5 !important;
+    z-index: -1;
   }
   .fa-plus-square {
     color: white !important;
