@@ -29,11 +29,14 @@
             class="complete-btn"
             @click="completeTodo(index)"
           />
-          <button @click="removeTodo(todo)" class="trash-btn">
+          <button @click="removeTodo(todo)" class="trash-btn" >
             <i class="fas fa-trash"></i>
           </button>
         </li>
       </ul>
+    </div>
+    <div class="github">
+      <a href="https://github.com/furkanarabul/vue-todo" target="_blank" title="to-do app"><i class="fab fa-github fa-2x"></i></a>
     </div>
   </div>
 </template>
@@ -75,6 +78,7 @@ export default {
       })
     },
     removeTodo(todo) {
+      event.target.parentElement.parentElement.classList.add('fall')
       axios.delete("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" + todo.id + ".json")
       .then(response =>{
         console.log(response)
@@ -113,6 +117,8 @@ export default {
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 body {
   font-family: "Abel", sans-serif;
@@ -185,13 +191,23 @@ button {
 button:hover {
   color: #2ca54a;
 }
-.todo-list {
-  margin-top: 3rem;
+ul{
+  padding:20px
 }
+a{
+  text-decoration: none;
+  color: inherit!important;
+  opacity: 0.2;
+}
+a:hover{
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
 .todo-item {
   background: white;
   padding: 0rem 0.5rem;
-  margin: 1rem;
+  margin-top: 1rem;
   height: 60px;
   color: black;
   font-size: 1.5rem;
@@ -231,6 +247,11 @@ button:hover {
 }
 .hidden {
   display: none;
+}
+.github{
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
 }
 @media (prefers-color-scheme: dark) {
   body {
