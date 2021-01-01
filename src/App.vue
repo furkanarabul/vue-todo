@@ -273,13 +273,20 @@ a:hover {
 }
 .github {
   position: fixed;
-  bottom: 15px;
-  left: 15px;
+  top: 15px;
+  right: 15px;
 }
 @media (prefers-color-scheme: dark) {
   body {
     background: #1b1b1b !important;
     color: white !important;
+  }
+  a{
+    color:gray!important;
+    opacity:0.5!important;
+  }
+  a:hover{
+    color:white!important;
   }
   .todo-item {
     background: #292929 !important;
