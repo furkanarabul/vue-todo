@@ -9,7 +9,10 @@
         v-model="newTodo"
         @keyup.enter="addTodo"
       />
-      <button @click="addTodo" class="todo-button">
+      <button
+        @click="addTodo"
+        class="todo-button"
+      >
         <i class="fas fa-plus-square"></i>
       </button>
     </div>
@@ -36,12 +39,9 @@
       </ul>
     </div>
     <div class="github">
-      <a
-        href="https://github.com/furkanarabul/vue-todo"
-        target="_blank"
-        title="to-do app"
-        ><i class="fab fa-github fa-2x"></i
-      ></a>
+      <a href="https://github.com/furkanarabul/vue-todo" target="_blank" title="to-do app">
+        <i class="fab fa-github fa-2x"></i>
+      </a>
     </div>
   </div>
 </template>
@@ -53,20 +53,20 @@ export default {
   data() {
     return {
       newTodo: "",
-      todos: []
+      todos: [],
     };
   },
   computed: {
-    isEmpty: function() {
+    isEmpty: function () {
       if (this.todos.length == 0) {
         return true;
       }
-    }
+    },
   },
   methods: {
     addTodo() {
       if (this.newTodo.trim().length == 0) {
-        alert("Please type something");
+        alert('please type something')
         return;
       }
       axios
@@ -74,15 +74,15 @@ export default {
           "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",
           { title: this.newTodo, completed: false }
         )
-        .then(response => {
+        .then((response) => {
           this.todos.push({
             id: response.data.name,
             title: this.newTodo,
-            completed: false
+            completed: false,
           });
           this.newTodo = "";
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         });
     },
@@ -97,14 +97,14 @@ export default {
             todo.id +
             ".json"
         )
-        .then(response => {
+        .then((response) => {
           console.log(response);
-          let index = this.todos.findIndex(i => {
+          let index = this.todos.findIndex((i) => {
             return i.id == todo.id;
           });
           this.todos.splice(index, 1);
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         });
     },
@@ -115,25 +115,25 @@ export default {
           ".json",
         { completed: !this.todos[index].completed }
       );
-    }
+    },
   },
   created() {
     axios
       .get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
-      .then(response => {
+      .then((response) => {
         for (let key in response.data) {
           //console.log(response.data[key].title)
           //console.log(response.data)
           let todo = {
             title: response.data[key].title,
             completed: response.data[key].completed,
-            id: key
+            id: key,
           };
           this.todos.push(todo);
         }
       })
       .catch();
-  }
+  },
 };
 </script>
 
@@ -276,17 +276,24 @@ a:hover {
   top: 15px;
   right: 15px;
 }
+.popover {
+  color: rgb(212, 68, 68);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(121, 121, 121, 0.5);
+}
 @media (prefers-color-scheme: dark) {
   body {
     background: #1b1b1b !important;
     color: white !important;
   }
-  a{
-    color:gray!important;
-    opacity:0.5!important;
+  a {
+    color: gray !important;
+    opacity: 0.5 !important;
   }
-  a:hover{
-    color:white!important;
+  a:hover {
+    color: white !important;
   }
   .todo-item {
     background: #292929 !important;
