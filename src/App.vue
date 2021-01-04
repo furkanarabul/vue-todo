@@ -36,7 +36,11 @@
       </ul>
     </div>
     <div class="github">
-      <a href="https://github.com/furkanarabul/vue-todo" target="_blank" title="to-do app">
+      <a
+        href="https://github.com/furkanarabul/vue-todo"
+        target="_blank"
+        title="to-do app"
+      >
         <i class="fab fa-github fa-2x"></i>
       </a>
     </div>
@@ -63,7 +67,7 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodo.trim().length == 0) {
-        this.$alert("Please type something.", "", "warning");
+        this.$alert("New task cannot be empty.", "", "warning");
         return;
       }
       axios
