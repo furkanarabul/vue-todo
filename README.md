@@ -1,6 +1,6 @@
 # vue-todo
 
-• I built to-do app with vuejs which is the exact same I did before with vanillajs.
+• I built to-do app with vuejs which is the exact same I did before with vanillajs. <br/>
 • To-do app uses axios and firebase database.
 
 ## Build Setup
