@@ -9,10 +9,7 @@
         v-model="newTodo"
         @keyup.enter="addTodo"
       />
-      <button
-        @click="addTodo"
-        class="todo-button"
-      >
+      <button @click="addTodo" class="todo-button">
         <i class="fas fa-plus-square"></i>
       </button>
     </div>
@@ -66,7 +63,7 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodo.trim().length == 0) {
-        alert('please type something')
+        this.$alert("Please type something.", "", "warning");
         return;
       }
       axios
@@ -87,7 +84,6 @@ export default {
         });
     },
     removeTodo(todo) {
-      console.log(event.target);
       if (event.target.classList.contains("fa-trash")) {
         event.target.parentElement.parentElement.classList.add("fall");
       }
@@ -98,7 +94,7 @@ export default {
             ".json"
         )
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           let index = this.todos.findIndex((i) => {
             return i.id == todo.id;
           });
