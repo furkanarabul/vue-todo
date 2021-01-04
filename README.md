@@ -4,7 +4,7 @@
 • To-do app uses axios and firebase database. 
 <br/>
 <br/>
-•For the live preview: https://vue-todo-437fb.web.app/
+• For the live preview: https://vue-todo-437fb.web.app/
 
 
 ## Build Setup
