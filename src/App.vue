@@ -98,7 +98,6 @@ export default {
             ".json"
         )
         .then((response) => {
-          //console.log(response);
           let index = this.todos.findIndex((i) => {
             return i.id == todo.id;
           });
@@ -124,8 +123,6 @@ export default {
       )
       .then((response) => {
         for (let key in response.data) {
-          //console.log(response.data[key].title)
-          //console.log(response.data)
           let todo = {
             title: response.data[key].title,
             completed: response.data[key].completed,
