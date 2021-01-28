@@ -72,7 +72,7 @@ export default {
       }
       axios
         .post(
-          "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json",
+          "https://vue-todo-list-15f14-default-rtdb.firebaseio.com/todoList.json",
           { title: this.newTodo, completed: false }
         )
         .then((response) => {
@@ -93,7 +93,7 @@ export default {
       }
       axios
         .delete(
-          "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" +
+          "https://vue-todo-list-15f14-default-rtdb.firebaseio.com/todoList/" +
             todo.id +
             ".json"
         )
@@ -110,7 +110,7 @@ export default {
     },
     completeTodo(index) {
       axios.patch(
-        "https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList/" +
+        "https://vue-todo-list-15f14-default-rtdb.firebaseio.com/todoList/" +
           this.todos[index].id +
           ".json",
         { completed: !this.todos[index].completed }
@@ -119,7 +119,9 @@ export default {
   },
   created() {
     axios
-      .get("https://vue-todo-437fb-default-rtdb.firebaseio.com/todoList.json")
+      .get(
+        "https://vue-todo-list-15f14-default-rtdb.firebaseio.com/todoList.json"
+      )
       .then((response) => {
         for (let key in response.data) {
           //console.log(response.data[key].title)
